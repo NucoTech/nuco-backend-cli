@@ -8,6 +8,16 @@ nuco后端命令行工具，含commit规范化提交等
 2. 根据不同的平台下载对应的命令行工具
 3. 将命令行工具的放置位置加入系统环境变量 (or PATH)
 
+> `nbc.exe`为Windows版, `nbc.darwin`和`nbc.linux`分别为MacOS和Linux版, 下载之后务必重命名
+
+```shell
+# MacOS
+mv nbc.darwin nbc
+
+# Linux
+mv nbc.linux nbc
+```
+
 ## 注意事项
 
 - Windows平台下请使用cmd而不是powershell，powershell的emoji有显示问题
