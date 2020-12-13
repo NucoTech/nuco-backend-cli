@@ -36,6 +36,14 @@ nuco后端命令行工具，含commit规范化提交等
 
 ## commit指令
 
+### 使用`nbc commit`命令替代`git commit -m`
+
+```shell
+git add .
+nbc commit
+git push
+```
+
 ### 标准commit规范
 
 ```text
