@@ -123,11 +123,12 @@ func RegisterCommitCommandAction() func(ctx *cli.Context) error {
 		getCommitInput("verified",  &commitVerified)
 		if commitVerified == "Y" {
 		//	执行 git commit -m 的操作
-			cmd := exec.Command("git", "commit", "-m", "\"" + commit + "\"")
+			cmd := exec.Command("git", "commit", "-m", commit)
 			err := cmd.Run()
 			if err != nil {
 				panic(err)
 			}
+			fmt.Println("commit已生成, 可以使用git push提交")
 		}
 		return nil
 	}
