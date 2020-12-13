@@ -32,7 +32,7 @@ nuco后端命令行工具，含commit规范化提交等
 
 ## commit指令
 
-###  标准commit规范
+### 标准commit规范
 
 ```text
 <type>(<scope>): <subject>
@@ -45,7 +45,6 @@ nuco后端命令行工具，含commit规范化提交等
 - type
 
 > `type`字段基于angular规范进行业务情况拓展, emoji风格
-
 
 | 类型 | 说明 |
 | --- | :--- |
