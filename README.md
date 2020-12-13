@@ -8,6 +8,10 @@ nuco后端命令行工具，含commit规范化提交等
 2. 根据不同的平台下载对应的命令行工具
 3. 将命令行工具的放置位置加入系统环境变量 (or PATH)
 
+## 注意事项
+
+- Windows平台下请使用cmd而不是powershell，powershell的emoji有显示问题
+
 ## 可用命令
 
 | 命令 | 说明 |
