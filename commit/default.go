@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/c-bata/go-prompt"
 	"github.com/urfave/cli/v2"
-	"os/exec"
+	"tech.nuco.nbc/utils"
 )
 
 var (
@@ -43,7 +43,11 @@ func commitTypeCompleter(d prompt.Document) []prompt.Suggest {
 
 func getCommitInput(structType string, handler *string) {
 	fmt.Print(">>> ")
-	n, _ := fmt.Scanln(handler)
+	n, err := utils.GetLineInput(handler)
+
+	if err != nil {
+		panic("获取输入错误")
+	}
 
 	switch structType {
 	case "subject": {
@@ -118,17 +122,12 @@ func RegisterCommitCommandAction() func(ctx *cli.Context) error {
 
 		// 生成commit
 		commit := makeCommit(commitType, commitSubject, commitBody, commitBroken, commitIssues)
+		fmt.Println(commitType, commitSubject, commitBody, commitBroken, commitIssues)
 		fmt.Printf("\n本次生成的提交信息:\n%s\n", commit)
 		fmt.Println("? 是否确定本次提交 (Y/n, 默认为Y)")
 		getCommitInput("verified",  &commitVerified)
 		if commitVerified == "Y" {
-			//	执行 git commit -m 的操作
-			// git message空格会出问题
-			cmd := exec.Command("git", "commit", "-m", commit)
-			err := cmd.Run()
-			if err != nil {
-				panic(err)
-			}
+			utils.RunGitCommitCommand(commit)
 			fmt.Println("commit已生成, 可以使用git push提交")
 		}
 		return nil
