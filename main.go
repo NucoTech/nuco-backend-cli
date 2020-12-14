@@ -15,7 +15,7 @@ func main() {
 	app := &cli.App{
 		Commands: []*cli.Command{
 			{
-				Name: "new",
+				Name: "init",
 				Usage: "初始化工程配置文件",
 				Action: initProj.RegisterInitCommandAction(),
 			},
