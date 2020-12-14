@@ -25,7 +25,7 @@ func RunGitCommitCommand(commit string)  {
 }
 
 func WriteFile(path, content string) {
-	file, err := os.OpenFile(path, os.O_CREATE, 0777)
+	file, err := os.OpenFile(path, os.O_WRONLY | os.O_CREATE, 0777)
 	if err != nil {
 		panic("文件打开错误")
 	}
