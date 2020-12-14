@@ -2,5 +2,5 @@ package utils
 
 // 常量信息
 const (
-	VERSION = "v1.1.0"
+	VERSION = "v1.1.1"
 )

@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"os"
 	"os/exec"
+	"strings"
 )
 
 func runCommand(cmd *exec.Cmd) {
@@ -45,4 +46,9 @@ func WriteFile(path, content string)  {
 	if err != nil {
 		panic("写入文件错误")
 	}
+}
+func GetLineInput(toVar *string) (int, error) {
+	input, err := bufio.NewReader(os.Stdin).ReadString('\n')
+	*toVar = strings.TrimSpace(input)
+	return len(*toVar), err
 }

@@ -43,7 +43,11 @@ func commitTypeCompleter(d prompt.Document) []prompt.Suggest {
 
 func getCommitInput(structType string, handler *string) {
 	fmt.Print(">>> ")
-	n, _ := fmt.Scanln(handler)
+	n, err := utils.GetLineInput(handler)
+
+	if err != nil {
+		panic("获取输入错误")
+	}
 
 	switch structType {
 	case "subject": {
@@ -118,6 +122,7 @@ func RegisterCommitCommandAction() func(ctx *cli.Context) error {
 
 		// 生成commit
 		commit := makeCommit(commitType, commitSubject, commitBody, commitBroken, commitIssues)
+		fmt.Println(commitType, commitSubject, commitBody, commitBroken, commitIssues)
 		fmt.Printf("\n本次生成的提交信息:\n%s\n", commit)
 		fmt.Println("? 是否确定本次提交 (Y/n, 默认为Y)")
 		getCommitInput("verified",  &commitVerified)

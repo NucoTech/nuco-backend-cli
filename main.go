@@ -10,7 +10,6 @@ import (
 	"tech.nuco.nbc/utils"
 )
 
-// TODO 注册命令行工具命令
 func main() {
 	app := &cli.App{
 		Commands: []*cli.Command{
