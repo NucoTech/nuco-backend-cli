@@ -122,7 +122,8 @@ func RegisterCommitCommandAction() func(ctx *cli.Context) error {
 		fmt.Println("? 是否确定本次提交 (Y/n, 默认为Y)")
 		getCommitInput("verified",  &commitVerified)
 		if commitVerified == "Y" {
-		//	执行 git commit -m 的操作
+			//	执行 git commit -m 的操作
+			// git message空格会出问题
 			cmd := exec.Command("git", "commit", "-m", commit)
 			err := cmd.Run()
 			if err != nil {
