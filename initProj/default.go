@@ -12,6 +12,7 @@ func generateGitIgnoreFile() {
 	filePath := ".gitignore"
 	fileContent := ".idea/\n"
 	utils.WriteFile(filePath, fileContent)
+	fmt.Println(".gitignore生成成功！")
 }
 
 // 注册初始化命令行

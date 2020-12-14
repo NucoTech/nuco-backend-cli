@@ -24,8 +24,8 @@ func RunGitCommitCommand(commit string)  {
 	runCommand(cmd)
 }
 
-func WriteFile(path, content string)  {
-	file, err := os.OpenFile(path, os.O_WRONLY, 0777)
+func WriteFile(path, content string) {
+	file, err := os.OpenFile(path, os.O_WRONLY | os.O_CREATE, 0777)
 	if err != nil {
 		panic("文件打开错误")
 	}
@@ -38,14 +38,11 @@ func WriteFile(path, content string)  {
 
 	// 写入文件
 	write := bufio.NewWriter(file)
-	_, err =write.WriteString(content)
+	_, err = write.WriteString(content)
 	if err != nil {
 		panic("写入缓存错误")
 	}
-	err = write.Flush()
-	if err != nil {
-		panic("写入文件错误")
-	}
+	_ = write.Flush()
 }
 func GetLineInput(toVar *string) (int, error) {
 	input, err := bufio.NewReader(os.Stdin).ReadString('\n')
