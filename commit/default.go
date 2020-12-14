@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/c-bata/go-prompt"
 	"github.com/urfave/cli/v2"
-	"os/exec"
+	"tech.nuco.nbc/utils"
 )
 
 var (
@@ -122,13 +122,7 @@ func RegisterCommitCommandAction() func(ctx *cli.Context) error {
 		fmt.Println("? 是否确定本次提交 (Y/n, 默认为Y)")
 		getCommitInput("verified",  &commitVerified)
 		if commitVerified == "Y" {
-			//	执行 git commit -m 的操作
-			// git message空格会出问题
-			cmd := exec.Command("git", "commit", "-m", commit)
-			err := cmd.Run()
-			if err != nil {
-				panic(err)
-			}
+			utils.RunGitCommitCommand(commit)
 			fmt.Println("commit已生成, 可以使用git push提交")
 		}
 		return nil
