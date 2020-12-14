@@ -36,3 +36,4 @@ mv nbc.linux nbc
 
 - [ ] 支持`upgrade`命令升级
 - [ ] 支持`init`命令生成通用配置文件
+- [ ] 需要重写`version`指令
