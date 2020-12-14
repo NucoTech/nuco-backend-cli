@@ -15,16 +15,7 @@ func main() {
 	app := &cli.App{
 		Commands: []*cli.Command{
 			{
-				Name: "info",
-				Usage: "打印工具信息",
-				Action: func(context *cli.Context) error {
-					fmt.Println("工具仓库地址: https://github.com/NucoTech/nuco-backend-cli")
-					fmt.Printf("当前版本:\t%s\n", utils.VERSION)
-					return nil
-				},
-			},
-			{
-				Name: "gen",
+				Name: "init",
 				Usage: "初始化工程配置文件",
 				Action: initProj.RegisterInitCommandAction(),
 			},
@@ -32,6 +23,15 @@ func main() {
 				Name:   "commit",
 				Usage:  "生成标准commit提交信息",
 				Action: commit.RegisterCommitCommandAction(),
+			},
+			{
+				Name: "info",
+				Usage: "打印工具信息",
+				Action: func(context *cli.Context) error {
+					fmt.Println("工具仓库地址: https://github.com/NucoTech/nuco-backend-cli")
+					fmt.Printf("当前版本:\t%s\n", utils.VERSION)
+					return nil
+				},
 			},
 			{
 				Name: "version",

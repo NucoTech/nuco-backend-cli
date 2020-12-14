@@ -16,9 +16,11 @@ func generateGitIgnoreFile() {
 
 // 注册初始化命令行
 func RegisterInitCommandAction() func(context *cli.Context) error {
-	generateGitIgnoreFile()
-	// 执行git commit
-	utils.RunGitAddCommand()
-	utils.RunGitCommitCommand(":tada: Initial Goland Project")
-	return nil
+	return func(context *cli.Context) error {
+		generateGitIgnoreFile()
+		// 执行git commit
+		utils.RunGitAddCommand()
+		utils.RunGitCommitCommand(":tada: Initial Goland Project")
+		return nil
+	}
 }
