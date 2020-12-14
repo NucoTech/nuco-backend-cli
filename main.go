@@ -24,7 +24,7 @@ func main() {
 				},
 			},
 			{
-				Name: "init",
+				Name: "gen",
 				Usage: "初始化工程配置文件",
 				Action: initProj.RegisterInitCommandAction(),
 			},
