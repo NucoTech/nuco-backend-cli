@@ -4,19 +4,26 @@ nuco后端命令行工具，含commit规范化提交等
 
 ## 安装方式
 
-1. 在release中找到最新的发行版
-2. 根据不同的平台下载对应的命令行工具
-3. 将命令行工具的放置位置加入系统环境变量 (or PATH)
+### 类Unix平台
 
-> `nbc.exe`为Windows版, `nbc.darwin`和`nbc.linux`分别为MacOS和Linux版, 下载之后务必重命名
+- `MacOS`
 
 ```shell
-# MacOS
-mv nbc.darwin nbc
-
-# Linux
-mv nbc.linux nbc
+wget https://github.com/NucoTech/nuco-backend-cli/releases/latest/download/install.darwin.sh
+bash install.darwin.sh
 ```
+
+- `Linux`
+
+```shell
+wget https://github.com/NucoTech/nuco-backend-cli/releases/latest/download/install.linux.sh
+bash install.linux.sh
+```
+
+### Windows平台
+
+- 在`release`中找到最新发布的`nbc.exe`
+- 将下载的`nbc.exe`所在目录加入环境变量PATH
 
 ## 注意事项
 
