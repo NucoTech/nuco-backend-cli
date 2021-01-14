@@ -34,7 +34,12 @@ bash install.linux.sh
 | 命令 | 说明 |
 | :--- | :--- |
 | `nbc commit` | 启动规范化commit交互 |
+| `nbc docs` | 生成文档模板 |
+| `nbc serve` | 启动静态服务 |
+| `nbc info` | 打印当前工具信息 |
+| `nbc version` | 打印当前工具版本 |
 
 ## 文档
 
 - [commit命令指南](commit命令使用指南.md)
+- [文档生成使用指南](文档生成使用指南.md)
