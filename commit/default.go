@@ -2,9 +2,9 @@ package commit
 
 import (
 	"fmt"
+	"github.com/NucoTech/nuco-backend-cli/utils"
 	"github.com/c-bata/go-prompt"
 	"github.com/urfave/cli/v2"
-	"github.com/NucoTech/nuco-backend-cli/utils"
 )
 
 var (
