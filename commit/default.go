@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/c-bata/go-prompt"
 	"github.com/urfave/cli/v2"
-	"tech.nuco.nbc/utils"
+	"github.com/NucoTech/nuco-backend-cli/utils"
 )
 
 var (

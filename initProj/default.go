@@ -3,7 +3,7 @@ package initProj
 import (
 	"fmt"
 	"github.com/urfave/cli/v2"
-	"tech.nuco.nbc/utils"
+	"github.com/NucoTech/nuco-backend-cli/utils"
 )
 
 // 生成.gitignore文件

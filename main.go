@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
+	"github.com/NucoTech/nuco-backend-cli/commit"
+	"github.com/NucoTech/nuco-backend-cli/initProj"
+	"github.com/NucoTech/nuco-backend-cli/utils"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
-	"tech.nuco.nbc/commit"
-	"tech.nuco.nbc/initProj"
-	"tech.nuco.nbc/utils"
 )
 
 func main() {

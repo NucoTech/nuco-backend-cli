@@ -37,10 +37,4 @@ bash install.linux.sh
 
 ## 文档
 
-- [commit命令指南](./docs/commit命令使用指南.md)
-
-## TODOs
-
-- [ ] 支持`upgrade`命令升级
-- [ ] 支持`init`命令生成通用配置文件
-- [ ] 需要重写`version`指令
+- [commit命令指南](commit命令使用指南.md)
