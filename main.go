@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"github.com/NucoTech/nuco-backend-cli/commit"
+	"github.com/NucoTech/nuco-backend-cli/docs"
+	"github.com/NucoTech/nuco-backend-cli/initProj"
+	"github.com/NucoTech/nuco-backend-cli/serve"
+	"github.com/NucoTech/nuco-backend-cli/utils"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
-	"tech.nuco.nbc/commit"
-	"tech.nuco.nbc/initProj"
-	"tech.nuco.nbc/utils"
 )
 
 func main() {
@@ -19,9 +21,26 @@ func main() {
 				Action: initProj.RegisterInitCommandAction(),
 			},
 			{
-				Name:   "commit",
-				Usage:  "生成标准commit提交信息",
+				Name: "commit",
+				Usage: "生成标准commit提交信息",
 				Action: commit.RegisterCommitCommandAction(),
+			},
+			{
+				Name: "docs",
+				Usage: "生成文档模板",
+				Action: docs.RegisterDocsCommandAction(),
+			},
+			{
+				Name: "serve",
+				Usage: "启动静态服务",
+				Action: serve.RegisterServeCommandAction(),
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name: "port",
+						Aliases: []string{"p"},
+						Usage: "指定端口号(default: 5001)",
+					},
+				},
 			},
 			{
 				Name: "info",

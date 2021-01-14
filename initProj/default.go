@@ -2,8 +2,8 @@ package initProj
 
 import (
 	"fmt"
+	"github.com/NucoTech/nuco-backend-cli/utils"
 	"github.com/urfave/cli/v2"
-	"tech.nuco.nbc/utils"
 )
 
 // 生成.gitignore文件
