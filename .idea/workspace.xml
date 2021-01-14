@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b8f31b3-71ea-4f4d-9740-97fc9e819962" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen_new.sh" beforeDir="false" afterPath="$PROJECT_DIR$/gen_new.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/contants.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/contants.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
