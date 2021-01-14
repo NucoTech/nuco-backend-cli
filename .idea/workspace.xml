@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b8f31b3-71ea-4f4d-9740-97fc9e819962" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/文档生成使用指南.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/docs/default.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serve/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/serve/default.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/contants.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/contants.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/文档生成使用指南.md" beforeDir="false" afterPath="$PROJECT_DIR$/文档生成使用指南.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

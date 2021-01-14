@@ -34,6 +34,13 @@ func main() {
 				Name: "serve",
 				Usage: "启动静态服务",
 				Action: serve.RegisterServeCommandAction(),
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name: "port",
+						Aliases: []string{"p"},
+						Usage: "指定端口号(default: 5001)",
+					},
+				},
 			},
 			{
 				Name: "info",
