@@ -1,45 +1,64 @@
-# nuco-backend-cli
+# nuco-docsify
 
-nuco后端命令行工具，含commit规范化提交等
+nuco基于docsify定制的文档模板仓库
 
-## 安装方式
+> 推荐您使用 [nbc](https://github.com/NucoTech/nuco-backend-cli) 作为commit规范化工具; 如果您在前端项目中使用本仓库模板, 建议您使用commitlint作为工程commit规范工具
 
-### 类Unix平台
+## :sparkles: Features
 
-- `MacOS`
+- 定制侧边栏
+- 定制导航栏
+- 支持全文搜索
+- 支持emoji
+- 支持代码粘贴
+- 支持字数统计
+- 支持分页
+- go语言语法高亮
+- 支持PWA
+- 支持夜间模式
+- 支持Footer信息
+
+## Usage
+
+- 修改`./docs`下的模板文件`index.html`, 修改其中的`meta`和`title`以做正确的SEO优化
+- 修改`window.$docsify`的配置项自定义功能
+- 修改其中的`README.md`和`guide.md`文件, 做好读者引导
+- 修改`<script>`的内容适当增删插件
+
+## Preview
+
+### 使用`docsify-cli`
 
 ```shell
-wget https://github.com/NucoTech/nuco-backend-cli/releases/latest/download/install.darwin.sh
-bash install.darwin.sh
+docsify serve docs
 ```
 
-- `Linux`
+### 不使用`docsify-cli`
+
+> 如果本地有静态服务器启动的命令行工具的话, 可以进入`./docs`文件夹之后启动服务
+
+- 比如`nodejs`的`httpserver`
 
 ```shell
-wget https://github.com/NucoTech/nuco-backend-cli/releases/latest/download/install.linux.sh
-bash install.linux.sh
+cd docs
+
+hs
 ```
 
-### Windows平台
+- 比如`nodejs`的`serve`
 
-- 在`release`中找到最新发布的`nbc.exe`
-- 将下载的`nbc.exe`所在目录加入环境变量PATH
+```shell
+cd docs
 
-## 注意事项
+serve
+```
 
-- Windows平台下请使用cmd而不是powershell，powershell的emoji有显示问题
+- 比如使用`Python`
 
-## 可用命令
+```shell
+cd docs && python -m SimpleHTTPServer 3000
+```
 
-| 命令 | 说明 |
-| :--- | :--- |
-| `nbc commit` | 启动规范化commit交互 |
-| `nbc docs` | 生成文档模板 |
-| `nbc serve` | 启动静态服务 |
-| `nbc info` | 打印当前工具信息 |
-| `nbc version` | 打印当前工具版本 |
+## References
 
-## 文档
-
-- [commit命令指南](commit命令使用指南.md)
-- [文档生成使用指南](文档生成使用指南.md)
+- [Docsify官方文档](https://docsify.js.org)
