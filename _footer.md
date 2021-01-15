@@ -1,2 +1,2 @@
 <!-- footer -->
-&copy; 2021 本项目遵循MIT协议
+&copy; 2021 [Nuco.Tech](https://github.com/NucoTech) All Rights Reserved! 本项目基于[MIT](https://github.com/NucoTech/nuco-backend-cli/blob/main/LICENSE)协议开源, 文档基于[nuco-docsify](https://github.com/NucoTech/nuco-docsify)模板生成

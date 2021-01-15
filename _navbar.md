@@ -1,6 +1,6 @@
 <!-- 定制导航栏 -->
 
-- [Home](/)
+- [文档](/)
 
 - 开源项目
   - [推荐项目](https://nucotech.github.io/RecommendProjects)
