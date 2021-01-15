@@ -49,3 +49,12 @@ func GetLineInput(toVar *string) (int, error) {
 	*toVar = strings.TrimSpace(input)
 	return len(*toVar), err
 }
+
+// 判断文件或者目录是否存在
+func IsExist(path string) bool {
+	_, err := os.Stat(path)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return true
+}

@@ -38,7 +38,11 @@ func main() {
 					&cli.StringFlag{
 						Name: "port",
 						Aliases: []string{"p"},
-						Usage: "指定端口号(default: 5001)",
+						Usage: "指定端口号 (default: 5001)",
+					},
+					&cli.BoolFlag{
+						Aliases: []string{"S"},
+						Usage: "启动https服务",
 					},
 				},
 			},

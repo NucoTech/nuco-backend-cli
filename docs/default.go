@@ -24,7 +24,7 @@ const GITHUB = "https://github.com"
 
 // 获取所有的文件链接下载
 func download(client http.Client, url, dir string, wg *sync.WaitGroup) {
-	if !isExist(dir){
+	if !utils.IsExist(dir){
 		_ = os.Mkdir(dir, os.ModePerm)
 	}
 	// 获取文件页
@@ -114,7 +114,7 @@ func getHTML(client http.Client, url string) ([]byte, error) {
 func generateDocsFromTemplate(dir string) error {
 	var err error
 	// 不在当前且不存在目录, 则默认创建目录
-	if dir != "." && dir != "./" && !isExist(dir) {
+	if dir != "." && dir != "./" && !utils.IsExist(dir) {
 		fmt.Printf("创建 %s 目录...\n", dir)
 		err = os.Mkdir(dir, os.ModePerm)
 	}
@@ -133,32 +133,6 @@ func generateDocsFromTemplate(dir string) error {
 // 判断是否是目录
 func isDir(link []byte) bool {
 	return bytes.Contains(link, []byte("tree"))
-}
-
-// 判断文件或者目录是否存在
-func isExist(path string) bool {
-	_, err := os.Stat(path)
-	if os.IsNotExist(err) {
-		return false
-	}
-	return true
-}
-
-// 获取仓库名
-func getRepositoryName(url string) string {
-	var pattern *regexp.Regexp
-	var count = strings.Count(url, "/")
-
-	if count > 4{
-		pattern = regexp.MustCompile(`https://github.com/.*?/(.*?)/`)
-	}else if count == 4{
-		pattern = regexp.MustCompile(`https://github.com/.*?/(.*$)`)
-	}else{
-		fmt.Println("url is wrong")
-		os.Exit(-1)
-	}
-	name := pattern.FindStringSubmatch(url)
-	return name[1]
 }
 
 // 生成文档
