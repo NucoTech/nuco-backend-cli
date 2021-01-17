@@ -6,6 +6,7 @@ import (
 	"github.com/NucoTech/nuco-backend-cli/docs"
 	"github.com/NucoTech/nuco-backend-cli/initProj"
 	"github.com/NucoTech/nuco-backend-cli/serve"
+	"github.com/NucoTech/nuco-backend-cli/update"
 	"github.com/NucoTech/nuco-backend-cli/utils"
 	"github.com/urfave/cli/v2"
 	"log"
@@ -45,6 +46,11 @@ func main() {
 						Usage: "启动https服务",
 					},
 				},
+			},
+			{
+				Name: "update",
+				Usage: "更新nbc工具",
+				Action: update.RegisterUpdateCommandAction(),
 			},
 			{
 				Name: "info",
