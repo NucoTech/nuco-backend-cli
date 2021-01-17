@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | `nbc commit` | `nbc commit` | 启动规范化commit输入交互 |
 | `nbc docs` | `nbc docs [dir]` | 生成文档模板 |
-| `nbc serve` | `nbc serve [-p] [dir]` | 启动静态服务 |
+| `nbc serve` | `nbc serve [-p] [dir] [-S]` | 启动静态服务 |
 | `nbc info` | `nbc info` | 打印当前工具信息 |
 | `nbc version` | `nbc version` | 打印当前工具版本 |
 
