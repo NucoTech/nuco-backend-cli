@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/NucoTech/nuco-backend-cli/utils"
 	"github.com/urfave/cli/v2"
-	"io"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -42,53 +41,9 @@ func download(client http.Client, url, dir string, wg *sync.WaitGroup) {
 		} else {
 			rep := repositoryPattern.FindSubmatch(link[2])
 			wg.Add(1)
-			go downloadFile(client, utils.DocsTemplateBase + string(rep[2]), dir, string(link[1]), wg)
+			go utils.DownloadFile(client, utils.DocsTemplateBase + string(rep[2]), dir, string(link[1]), wg)
 		}
 	}
-}
-
-// 下载文件
-func downloadFile(client http.Client, fileUrl, dir, filename string, wg *sync.WaitGroup) {
-	defer wg.Done()
-	fmt.Printf("开始下载 %s...\n", filename)
-
-	resp, err := client.Get(fileUrl)
-	if err != nil {
-		fmt.Printf("下载文件 %s 失败, 原因是: %s\n", filename, err.Error())
-		return
-	}
-
-	defer func() {
-		_ = resp.Body.Close()
-	}()
-
-	var buff [1024]byte
-	//	创建文件
-	file, err := os.Create(filepath.Join(dir, filename))
-	defer func() {
-		_ = file.Close()
-	}()
-
-	if err != nil {
-		fmt.Printf("创建文件 %s 错误\n", filename)
-		return
-	}
-
-	// 文件写入
-	for {
-		n, err := resp.Body.Read(buff[:])
-		_ , _ = file.Write(buff[:n])
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			fmt.Println("错误:", err)
-			// 如果错误, 删掉这个文件
-			_ = os.Remove(filepath.Join(dir, filename))
-			return
-		}
-	}
-	fmt.Printf("下载 %s 完成!\n", filename)
 }
 
 // 获取HTML

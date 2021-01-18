@@ -1,34 +1,119 @@
 package update
 
 import (
+	"bytes"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/NucoTech/nuco-backend-cli/utils"
 	"github.com/urfave/cli/v2"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"os/exec"
+	"path/filepath"
 	"regexp"
+	"runtime"
 	"strconv"
+	"strings"
 )
+
+type LatestReleaseType struct {
+	Url string `json:"url"`
+	HtmlUrl string `json:"html_url"`
+	AssetsUrl string `json:"assets_url"`
+	UploadUrl string `json:"upload_url"`
+	TarballUrl string `json:"tarball_url"`
+	ZipballUrl string `json:"zipball_url"`
+	Id int `json:"id"`
+	NodeId string `json:"node_id"`
+	TagName string `json:"tag_name"`
+	TargetCommitish string `json:"target_commitish"`
+	Name string `json:"name"`
+	Body string `json:"body"`
+	Draft bool `json:"draft"`
+	Prerelease bool `json:"prerelease"`
+	CreatedAt string `json:"created_at"`
+	PublishedAt string `json:"published_at"`
+	Author interface{} `json:"author"`
+	Assets []interface{} `json:"assets"`
+}
 
 var versionPattern = regexp.MustCompile(`v([0-9]*).([0-9]*).([0-9]*)`)
 
-const repo = "https://github.com/NucoTech/nuco-backend-cli"
+const repo = "https://api.github.com/repos/NucoTech/nuco-backend-cli/releases/latest"
+
+// 新版本检查
+func ifLatestVersion(now, remote []int) bool {
+	if remote[0] > now[0] || remote[1] > now[1] || remote[2] > now[2] {
+		return false
+	}
+	return true
+}
 
 // 获取远端最新版本
 func getRemoteVersion() (string, error) {
-	//res, err := http.Get(repo)
-	//if err != nil {
-	//	return "", err
-	//}
+	res, err := http.Get(repo)
+	if err != nil {
+		return "", err
+	}
 
-	return "", nil
+	defer func() {
+		_ = res.Body.Close()
+	}()
+
+	body, err := ioutil.ReadAll(res.Body)
+
+	if err != nil {
+		return "", err
+	}
+
+	// 数据结构体
+	var latestRelease LatestReleaseType
+	if err := json.Unmarshal(body, &latestRelease); err != nil {
+		return "", err
+	}
+
+	return latestRelease.TagName, nil
 }
 
 // 比较版本号
-func compareVersion()  {
+func CompareLatestVersion() (string, bool) {
 	localVersion, err := getVersion(utils.VERSION)
-	fmt.Println(localVersion)
+	remote, err := getRemoteVersion()
+	remoteVersion, err := getVersion(remote)
+
+	// 错误处理
 	if err != nil {
 		panic(err)
 	}
+
+	if !ifLatestVersion(localVersion, remoteVersion) {
+		return remote, false
+	} else {
+		return utils.VERSION, true
+	}
+}
+
+// 获取对应平台软件
+func backPlatformVersion(version string) (url, filename string) {
+	url = utils.NewVersionCDN + version + "nbc."
+	filename = "nbc."
+	switch runtime.GOOS {
+		case "windows": {
+			url = url + "exe"
+			filename = filename + "exe.tmp"
+		}
+		case "darwin": {
+			url = url + "darwin"
+			filename = filename + "darwin.tmp"
+		}
+		case "linux": {
+			url = url + "linux"
+			filename = filename + "linux.tmp"
+		}
+	}
+	return filename, url
 }
 
 // 版本号解析
@@ -43,9 +128,77 @@ func getVersion(version string) ([]int, error) {
 	return []int{version1, version2, version3}, nil
 }
 
+func getHomeDir() (string, error) {
+	if home := os.Getenv("HOME"); home != "" {
+		return home, nil
+	}
+
+	// If that fails, try the shell
+	var stdout bytes.Buffer
+	cmd := exec.Command("sh", "-c", "eval echo ~$USER")
+	cmd.Stdout = &stdout
+	if err := cmd.Run(); err != nil {
+		return "", err
+	}
+
+	result := strings.TrimSpace(stdout.String())
+	if result == "" {
+		return "", errors.New("blank output when reading home directory")
+	}
+
+	return result, nil
+}
+
 func RegisterUpdateCommandAction() func(context *cli.Context) error {
 	return func(context *cli.Context) error {
-		compareVersion()
+		version, latest := CompareLatestVersion()
+		filename, url := backPlatformVersion(version)
+
+		if !latest {
+			var c http.Client
+
+			if runtime.GOOS == "windows" {
+				// 下载到当前文件夹
+				if utils.IsExist("nbc.exe") {
+					dir, _ := os.Getwd()
+					utils.BlockDownloadFile(c, url, dir, filename)
+					// 删除旧版本
+					err := os.Remove(filepath.Join(dir, "nbc.exe"))
+					err = os.Rename(filepath.Join(dir, "nbc.exe.tmp"), filepath.Join(dir, "nbc.exe"))
+					if err != nil {
+						panic(err)
+					}
+					fmt.Printf("更新nbc成功, 版本号为: %v\n", utils.VERSION)
+				} else {
+					panic(errors.New("请在nbc.exe对应的文件夹执行更新"))
+				}
+			} else {
+				home, err := getHomeDir()
+				if err != nil {
+					panic(err)
+				}
+				utils.BlockDownloadFile(c, url, home, filename)
+
+				cmd := exec.Command("sudo chmod", "+x", filepath.Join(home, filename))
+				err = cmd.Run()
+				if err != nil {
+					panic(err)
+				}
+				err = os.Remove("/usr/bin/nbc")
+				if err != nil {
+					panic(errors.New("删除旧版本失败"))
+				}
+
+				cmd1 := exec.Command("mv", filepath.Join(home, filename), "/usr/bin/nbc")
+				err = cmd1.Run()
+				if err != nil {
+					panic(err)
+				}
+			}
+		} else {
+			fmt.Printf("当前版本为最新版本, 版本号为 %v\n", version)
+		}
+
 		return nil
 	}
 }
