@@ -97,7 +97,7 @@ func CompareLatestVersion() (string, bool) {
 
 // 获取对应平台软件
 func backPlatformVersion(version string) (url, filename string) {
-	url = utils.NewVersionCDN + version + "nbc."
+	url = utils.NewVersionCDN + version + "/nbc."
 	filename = "nbc."
 	switch runtime.GOOS {
 		case "windows": {
@@ -163,12 +163,8 @@ func RegisterUpdateCommandAction() func(context *cli.Context) error {
 					dir, _ := os.Getwd()
 					utils.BlockDownloadFile(c, url, dir, filename)
 					// 删除旧版本
-					err := os.Remove(filepath.Join(dir, "nbc.exe"))
-					err = os.Rename(filepath.Join(dir, "nbc.exe.tmp"), filepath.Join(dir, "nbc.exe"))
-					if err != nil {
-						panic(err)
-					}
-					fmt.Printf("更新nbc成功, 版本号为: %v\n", utils.VERSION)
+					fmt.Println("\n请手动删除nbc.exe, 并将nbc.exe.tmp文件重命名为nbc.exe以完成更新")
+					fmt.Println("\n执行 nbc info 即可查看更新后的信息")
 				} else {
 					panic(errors.New("请在nbc.exe对应的文件夹执行更新"))
 				}
