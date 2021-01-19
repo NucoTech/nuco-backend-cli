@@ -175,21 +175,14 @@ func RegisterUpdateCommandAction() func(context *cli.Context) error {
 				}
 				utils.BlockDownloadFile(c, url, home, filename)
 
-				cmd := exec.Command("sudo chmod", "+x", filepath.Join(home, filename))
+				cmd := exec.Command("chmod", "+x", filepath.Join(home, filename))
 				err = cmd.Run()
 				if err != nil {
 					panic(err)
 				}
-				err = os.Remove("/usr/bin/nbc")
-				if err != nil {
-					panic(errors.New("删除旧版本失败"))
-				}
-
-				cmd1 := exec.Command("mv", filepath.Join(home, filename), "/usr/bin/nbc")
-				err = cmd1.Run()
-				if err != nil {
-					panic(err)
-				}
+				fmt.Printf("授予 %v 可执行权限成功!\n", filepath.Join(home, filename))
+				fmt.Printf("\n请手动执行 sudo mv %v /usr/bin/nbc 以更新完成!", filepath.Join(home, filename))
+				fmt.Println("\n执行 nbc info 即可查看更新后的信息")
 			}
 		} else {
 			fmt.Printf("当前版本为最新版本, 版本号为 %v\n", version)
