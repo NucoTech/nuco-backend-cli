@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/NucoTech/nuco-backend-cli/commit"
+	"github.com/NucoTech/nuco-backend-cli/config"
 	"github.com/NucoTech/nuco-backend-cli/docs"
 	"github.com/NucoTech/nuco-backend-cli/initProj"
 	"github.com/NucoTech/nuco-backend-cli/serve"
@@ -51,6 +52,18 @@ func main() {
 				Name:   "update",
 				Usage:  "更新nbc工具",
 				Action: update.RegisterUpdateCommandAction(),
+			},
+			{
+				Name: "config",
+				Usage: "打印nbc配置",
+				Action: config.RegisterConfigCommandAction(),
+				Subcommands: []*cli.Command{
+					{
+						Name: "init",
+						Usage: "导出配置文件",
+						Action: config.RegisterConfigInitCommandAction(),
+					},
+				},
 			},
 			{
 				Name:  "info",
