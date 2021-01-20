@@ -59,7 +59,7 @@ openssl req -new -x509 -sha256 -key key.pem -out cert.pem
 nbc serve -S .
 ```
 
-## 在默认目录`docs`使用
+## 默认目录`docs`预览支持TLS
 
 > 由于`nbc`设计机制的缘故, 默认启动服务在`docs`文件夹下, 因此需要首先进入`docs`文件夹, 再遵守上述的步骤
 
