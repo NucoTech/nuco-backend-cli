@@ -45,8 +45,12 @@ const repo = "https://api.github.com/repos/NucoTech/nuco-backend-cli/releases/la
 
 // 新版本检查
 func ifLatestVersion(now, remote []int) bool {
-	if remote[0] > now[0] || remote[1] > now[1] || remote[2] > now[2] {
-		return false
+	for i := 0; i < len(now); i++ {
+		if remote[i] > now[i] {
+			return false
+		} else if remote[i] < now[i] {
+			return true
+		}
 	}
 	return true
 }
