@@ -16,7 +16,7 @@ import (
 )
 
 // 匹配title和href
-var urlPattern = regexp.MustCompile(`<a class="js-navigation-open link-gray-dark" title="(.*?)" href="(.*?)">`)
+var urlPattern = regexp.MustCompile(`<a class="js-navigation-open link-gray-dark" title="(.*?)" data-pjax="#repo-content-pjax-container" href="(.*?)">`)
 var repositoryPattern = regexp.MustCompile(`(/.*?/.*?/)blob/(.*$)`)
 
 const GITHUB = "https://github.com"

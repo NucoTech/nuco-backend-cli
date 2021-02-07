@@ -10,7 +10,7 @@ import (
 func generateGitIgnoreFile() {
 	fmt.Println("生成.gitignore文件中...")
 	filePath := ".gitignore"
-	fileContent := ".idea/\n"
+	fileContent := ".idea\n"
 	utils.WriteFile(filePath, fileContent)
 	fmt.Println(".gitignore生成成功！")
 }
