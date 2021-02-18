@@ -7,4 +7,5 @@
 ## Email
 
 - Nuco.Tech业务反馈: feedback@mail.nuco.tech
-- Herbert He: he_jun_jie_dev@mail.nuco.tech
+- Nuco.Tech后端开发反馈: backend_dev@mail.nuco.tech
+- Herbert He: he_junjie_dev@mail.nuco.tech
