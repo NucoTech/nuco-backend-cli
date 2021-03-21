@@ -101,20 +101,30 @@ func CompareLatestVersion() (string, bool) {
 
 // 获取对应平台软件
 func backPlatformVersion(version string) (url, filename string) {
-	url = utils.NewVersionCDN + version + "/nbc."
-	filename = "nbc."
+	url = utils.NewVersionCDN + version + "/nbc"
+	filename = "nbc"
 	switch runtime.GOOS {
 		case "windows": {
-			url = url + "exe"
-			filename = filename + "exe.tmp"
+			url = url + ".exe"
+			filename = filename + ".exe.tmp"
 		}
 		case "darwin": {
-			url = url + "darwin"
-			filename = filename + "darwin.tmp"
+			if runtime.GOARCH == "arm64" {
+				url = url + "-arm64.darwin"
+				filename = filename + "-arm64.darwin.tmp"
+			} else {
+				url = url + ".darwin"
+				filename = filename + ".darwin.tmp"
+			}
 		}
 		case "linux": {
-			url = url + "linux"
-			filename = filename + "linux.tmp"
+			if runtime.GOARCH == "arm64" {
+				url = url + "-arm64.linux"
+				filename = filename + "-arm64.linux.tmp"
+			} else {
+				url = url + ".linux"
+				filename = filename + ".linux.tmp"
+			}
 		}
 	}
 	return filename, url

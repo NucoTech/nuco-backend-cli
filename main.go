@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/NucoTech/nuco-backend-cli/commit"
-	"github.com/NucoTech/nuco-backend-cli/config"
 	"github.com/NucoTech/nuco-backend-cli/docs"
 	"github.com/NucoTech/nuco-backend-cli/initProj"
 	"github.com/NucoTech/nuco-backend-cli/serve"
@@ -12,6 +11,7 @@ import (
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
+	"runtime"
 )
 
 func main() {
@@ -53,24 +53,25 @@ func main() {
 				Usage:  "更新nbc工具",
 				Action: update.RegisterUpdateCommandAction(),
 			},
-			{
-				Name: "config",
-				Usage: "打印nbc配置",
-				Action: config.RegisterConfigCommandAction(),
-				Subcommands: []*cli.Command{
-					{
-						Name: "init",
-						Usage: "导出配置文件",
-						Action: config.RegisterConfigInitCommandAction(),
-					},
-				},
-			},
+			//{
+			//	Name: "config",
+			//	Usage: "打印nbc配置",
+			//	Action: config.RegisterConfigCommandAction(),
+			//	Subcommands: []*cli.Command{
+			//		{
+			//			Name: "init",
+			//			Usage: "导出配置文件",
+			//			Action: config.RegisterConfigInitCommandAction(),
+			//		},
+			//	},
+			//},
 			{
 				Name:  "info",
 				Usage: "打印工具信息",
 				Action: func(context *cli.Context) error {
 					fmt.Println("工具仓库地址: https://github.com/NucoTech/nuco-backend-cli")
-					fmt.Printf("当前版本:\t%s\n", utils.VERSION)
+					fmt.Printf("OS:\t%s\nArch:\t%s\n", runtime.GOOS, runtime.GOARCH)
+					fmt.Printf("Version:\t%s\n", utils.VERSION)
 					return nil
 				},
 			},

@@ -3,3 +3,5 @@
 nbc.exe
 nbc.linux
 nbc.darwin
+nbc-arm64.linux
+nbc-arm64.darwin
