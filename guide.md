@@ -4,6 +4,7 @@
 
 - [安装nbc Install](content/install.md "安装nbc")
 - [更新nbc Update](content/update.md "更新nbc")
+- [编译nbc Compile](content/compile.md "手动编译nbc")
 - [基础命令 Basic Commands](content/basic.md "基础命令")
 - [`nbc commit`详解](content/commit.md "nbc commit详解")
 - [`nbc docs`详解](content/docs.md "nbc docs详解")

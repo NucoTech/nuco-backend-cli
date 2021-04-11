@@ -2,6 +2,8 @@
 
 `nbc`支持Windows、Linux、MacOS这些不同平台的使用, 跟随下面不同平台的教程可以让你快速安装`nbc`工具
 
+> arm64 平台下的支持请参考 [编译nbc](content/compile.md)
+
 ## Windows平台
 
 1. 在[Release](https://github.com/NucoTech/nuco-backend-cli/releases)中找到最新发布的`nbc.exe`

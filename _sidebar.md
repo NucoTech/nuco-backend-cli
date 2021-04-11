@@ -3,6 +3,7 @@
 - [介绍 Introduce](README.md "介绍Introduce")
 - [指南 Guide](guide.md "指南Guide")
 - [安装nbc Install](content/install.md "安装nbc")
+- [编译nbc Compile](content/compile.md "手动编译nbc")
 - [更新nbc Update](content/update.md "更新nbc")
 - 使用 Usage
   - [基础命令 Basic Commands](content/basic.md "基础命令")
