@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/NucoTech/nuco-backend-cli/utils"
 	"github.com/c-bata/go-prompt"
+	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
 )
 
@@ -103,7 +104,7 @@ func RegisterCommitCommandAction() func(ctx *cli.Context) error {
 		var commitBroken string
 		var commitIssues string
 		var commitVerified string
-		fmt.Println("? 选择你提交的类型 (Tab键自动填充)")
+		color.HiGreen("? 选择你提交的类型 (Tab键自动填充)")
 		commitType := prompt.Input(">>> ", commitTypeCompleter)
 		// 检查提交
 		if !checkCommitType(commitType) {
@@ -111,20 +112,20 @@ func RegisterCommitCommandAction() func(ctx *cli.Context) error {
 		}
 
 		// 获取输入
-		fmt.Println("? 本次提交的简述")
+		color.HiGreen("? 本次提交的简述")
 		getCommitInput("subject", &commitSubject)
-		fmt.Println("? 本次提交的具体描述 (可选)")
+		color.HiGreen("? 本次提交的具体描述 (可选)")
 		getCommitInput("body", &commitBody)
-		fmt.Println("? 本次提交是否存在 BREAKING CHANGES (不兼容更新, Y/n 默认为 n)")
+		color.HiYellow("? 本次提交是否存在 BREAKING CHANGES (不兼容更新, Y/n 默认为 n)")
 		getCommitInput("BREAKING", &commitBroken)
-		fmt.Println("? 本次提交是否关闭已知的issue (可选, eg. #1 #2)")
+		color.HiYellow("? 本次提交是否关闭已知的issue (可选, eg. #1 #2)")
 		getCommitInput("issue",  &commitIssues)
 
 		// 生成commit
 		commit := makeCommit(commitType, commitSubject, commitBody, commitBroken, commitIssues)
 		fmt.Println(commitType, commitSubject, commitBody, commitBroken, commitIssues)
 		fmt.Printf("\n本次生成的提交信息:\n%s\n", commit)
-		fmt.Println("? 是否确定本次提交 (Y/n, 默认为Y)")
+		color.HiRed("? 是否确定本次提交 (Y/n, 默认为Y)")
 		getCommitInput("verified",  &commitVerified)
 		if commitVerified == "Y" {
 			utils.RunGitCommitCommand(commit)
